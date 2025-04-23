@@ -1,18 +1,23 @@
 import bannerImage from './assets/undraw_data-processing_z2q6.svg'
 
 import Header from './components/Header'
+import Footer from './components/Footer';
+import Button from './components/Button';
 import Pricing from './components/Pricing';
+import Input from './components/Form/Input';
 import KeyFeature from './components/KeyFeature'
+import Textarea from './components/Form/Textarea';
+import FormGroup from './components/Form/FormGroup';
+import PriceButton from './components/Pricing/PriceButton';
 
+import { useState } from 'react';
 import { IoAnalytics } from "react-icons/io5";
 import { TbAutomation } from "react-icons/tb";
 import { GrIntegration } from 'react-icons/gr';
-import Footer from './components/Footer';
-import { useState } from 'react';
-import PriceButton from './components/Pricing/PriceButton';
 
 function App() {
   const [priceType, setPriceType] = useState("monthly")
+
   const handlePriceType = (val) => setPriceType(val)
 
   const keyFeature = [
@@ -86,7 +91,7 @@ function App() {
   ]
 
   return <>
-    <div className="flex flex-col lg:gap-0 gap-10">
+    <div className="flex flex-col lg:gap-0 gap-10 relative">
       <Header />
       <div className="lg:p-18 p-8 relative top-0" id="home">
         <div className="bg-blue-200 w-[400px] h-[400px] absolute -left-10 -top-20" style={{ borderRadius: '34% 54% 68% 30% / 32% 58% 42% 47%' }}></div>
@@ -101,9 +106,7 @@ function App() {
               </p>
             </div>
             <div>
-              <button className="bg-white rounded-3xl font-bold md:text-lg text-sm px-5 py-3 cursor-pointer bg-linear-to-bl from-blue-400 to-blue-700 text-white">
-                Get Started
-              </button>
+              <Button title="Get Started" />
             </div>
           </div>
           <div className="lg:w-[50%] w-[100%] flex justify-center h-auto">
@@ -164,23 +167,18 @@ function App() {
             </p>
           </div>
           <div className="flex flex-col gap-5 lg:w-[40%] w-full">
-            <div className="flex flex-col w-full font-display gap-3">
-              <label htmlFor="" className="font-bold">Name</label>
-              <input type="text" placeholder="Input your name" className="border border-black/[0.1] p-4 bg-white" />
-            </div>
-            <div className="flex flex-col w-full font-display gap-3">
-              <label htmlFor="" className="font-bold">Email</label>
-              <input type="email" placeholder="Input your email" className="border border-black/[0.1] p-4 bg-white" />
-            </div>
-            <div className="flex flex-col w-full font-display gap-3">
-              <label htmlFor="" className="font-bold">Message</label>
-              <textarea name="" className="border border-black/[0.1] p-4 bg-white"></textarea>
-            </div>
-            <div className="flex flex-col w-full font-display gap-3">
-              <button className="bg-white rounded-3xl font-bold md:text-lg text-sm px-5 py-3 cursor-pointer bg-linear-to-bl from-blue-400 to-blue-700 text-white">
-                Send Message
-              </button>
-            </div>
+            <FormGroup label="Name">
+              <Input type="text" placeholder="Input your name" />
+            </FormGroup>
+            <FormGroup label="Email">
+              <Input type="email" placeholder="Input your name" />
+            </FormGroup>
+            <FormGroup label="Message">
+              <Textarea />
+            </FormGroup>
+            <FormGroup>
+              <Button title="Send Message" />
+            </FormGroup>
           </div>
         </div>
       </div>
