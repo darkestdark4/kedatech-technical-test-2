@@ -22,7 +22,7 @@ function Header() {
 
   return (
     <>
-      <div className="px-5 md:py-5 py-0 font-display z-20 fixed w-full top-0 overflow-hidden">
+      <div className="px-5 md:py-5 py-0 font-display z-20 absolute w-full top-0 overflow-hidden">
         <div className="flex justify-between items-center py-5 md:px-8 px-5 rounded-xl shadow-md bg-white relative z-10">
           <div className="flex gap-3 items-center">
             <img src={logo} alt="logo" className="w-10 h-10" />

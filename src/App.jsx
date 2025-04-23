@@ -10,16 +10,33 @@ import Textarea from './components/Form/Textarea';
 import FormGroup from './components/Form/FormGroup';
 import PriceButton from './components/Pricing/PriceButton';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoAnalytics } from "react-icons/io5";
 import { TbAutomation } from "react-icons/tb";
 import { GrIntegration } from 'react-icons/gr';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [priceType, setPriceType] = useState("monthly")
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [btnScrollTop, setBtnScrollTop] = useState(false)
 
   const handlePriceType = (val) => setPriceType(val)
 
+  const handleScroll = () => {
+    const position = window.pageYOffset; // get scroll position value
+    setScrollPosition(position)
+  }
+  
+  // function for scroll to top with smooth transition
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
+
+  // dummy data for key feature in about us section
   const keyFeature = [
     {
       id: 1,
@@ -41,6 +58,7 @@ function App() {
     }
   ]
 
+  // dummy data for pricing
   const pricingData = [
     {
       id: 1,
@@ -90,12 +108,25 @@ function App() {
     }
   ]
 
+  useEffect(() => {
+    // set scroll position value when user scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // set button scroll top active when scroll position > 600
+    if (scrollPosition > 600) {
+      setBtnScrollTop(true)
+    } else {
+      setBtnScrollTop(false)
+    }
+  }, [scrollPosition])
+
   return <>
     <div className="flex flex-col lg:gap-0 gap-10 relative">
       <Header />
-      <div className="lg:p-18 p-8 relative top-0" id="home">
+
+      <div className="lg:p-18 p-8" id="home">
         <div className="bg-blue-200 w-[400px] h-[400px] absolute -left-10 -top-20" style={{ borderRadius: '34% 54% 68% 30% / 32% 58% 42% 47%' }}></div>
-        <div className="w-full relative z-10 flex lg:flex-row flex-col items-center justify-between gap-10 mt-28">
+        <div className="w-full relative z-10 flex lg:flex-row flex-col items-center justify-between gap-10 md:mt-28 mt-20">
           <div className="lg:w-[40%] w-[100%] font-display flex flex-col gap-8">
             <span className="lg:text-md text-sm">One Platform. Complete Control. Better Results.</span>
             <div className="flex flex-col gap-8">
@@ -182,6 +213,9 @@ function App() {
           </div>
         </div>
       </div>
+
+      <ScrollToTop onClick={scrollTop} isActive={btnScrollTop} />
+
       <Footer />
     </div>
   </>
