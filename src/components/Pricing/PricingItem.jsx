@@ -1,15 +1,6 @@
-import { FaCheck } from "react-icons/fa";
+import PricingPoint from "./PricingPoint"
 
-function Pricing({ type, price, points, priceType }) {
-  const PricingPoint = ({ text }) => {
-    return (
-      <div className="flex items-center gap-4">
-        <FaCheck className="w-4 h-4" />
-        <span>{text}</span>
-      </div>
-    )
-  }
-
+function PricingItem({ type, price, points, priceType }) {
   let activePrice = 0
   let activePriceText = ""
   if (priceType === "monthly") {
@@ -41,4 +32,4 @@ function Pricing({ type, price, points, priceType }) {
   )
 }
 
-export default Pricing
+export default PricingItem
