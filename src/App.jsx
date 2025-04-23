@@ -7,8 +7,14 @@ import KeyFeature from './components/KeyFeature'
 import { IoAnalytics } from "react-icons/io5";
 import { TbAutomation } from "react-icons/tb";
 import { GrIntegration } from 'react-icons/gr';
+import Footer from './components/Footer';
+import { useState } from 'react';
+import PriceButton from './components/Pricing/PriceButton';
 
 function App() {
+  const [priceType, setPriceType] = useState("monthly")
+  const handlePriceType = (val) => setPriceType(val)
+
   const keyFeature = [
     {
       id: 1,
@@ -128,12 +134,20 @@ function App() {
           </div>
           <div className="flex flex-col items-center gap-10">
             <div className="flex gap-4 font-display">
-              <span className="shadow-md rounded-2xl px-5 py-2 cursor-pointer bg-white font-bold">Monthly</span>
-              <span className="shadow-md rounded-2xl px-5 py-2 cursor-pointer bg-white font-bold">Yearly</span>
+              <PriceButton
+                text="Monthly"
+                onSelect={() => handlePriceType("monthly")}
+                isActive={priceType === "monthly" ? true : false}
+              />
+              <PriceButton
+                text="Yearly"
+                onSelect={() => handlePriceType("yearly")}
+                isActive={priceType === "yearly" ? true : false}
+              />
             </div>
             <div className="flex lg:flex-row flex-col justify-center gap-10 font-display">
               {pricingData.map((item) => {
-                return <Pricing {...item} />
+                return <Pricing {...item} key={item.id} priceType={priceType} />
               })}
             </div>
           </div>
@@ -170,6 +184,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   </>
 }
